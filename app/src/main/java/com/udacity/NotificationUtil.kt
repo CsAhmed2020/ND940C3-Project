@@ -8,10 +8,9 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 
-// Notification ID.
+
 private val NOTIFICATION_ID = 0
-private val REQUEST_CODE = 0
-private val FLAGS = 0
+
 
 @SuppressLint("UnspecifiedImmutableFlag")
 fun NotificationManager.sendNotification(status: String, fileName:String, applicationContext: Context) {

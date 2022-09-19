@@ -81,10 +81,6 @@ class MainActivity : AppCompatActivity() {
 
         notificationManager = ContextCompat.getSystemService(applicationContext,NotificationManager::class.java) as NotificationManager
         createChannel(getString(R.string.file_notification_channel_id),getString(R.string.file_notification_channel_name))
-        val file = File(getExternalFilesDir(null),"/repository")
-        if (!file.exists()){
-            file.mkdirs()
-        }
 
         val request =
             DownloadManager.Request(Uri.parse(repoUrl))

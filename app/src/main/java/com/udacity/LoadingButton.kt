@@ -19,7 +19,7 @@ class LoadingButton @JvmOverloads constructor(
 
     private val valueAnimator = ValueAnimator()
     private val btnBackColor = Color.GRAY
-    private val textColor = Color.WHITE
+    private val textColor = context.getColor(R.color.white)
     private var progress : Double = 0.0
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
@@ -85,8 +85,7 @@ class LoadingButton @JvmOverloads constructor(
             //animated circle
             paint.color = Color.GREEN
             paint.strokeWidth = 40f
-           // canvas.drawArc(loadingCircle,0f,360 * (progress/100).toFloat(),true,animatedCirclePaint)
-            canvas.drawArc(loadingCircle, 270f, (360 * progress / 100).toFloat(), true, animatedCirclePaint)
+            canvas.drawArc(loadingCircle, 0f, (360 * progress / 100).toFloat(), true, animatedCirclePaint)
         }
 
         //text
@@ -121,9 +120,7 @@ class LoadingButton @JvmOverloads constructor(
             repeatCount = INFINITE
             repeatMode = REVERSE
             addUpdateListener {
-                val percentage = it.getAnimatedValue("progress") as Float
-                progress = percentage.toDouble()
-               // progress = (it.animatedValue as Float).toDouble()
+                progress = (it.animatedValue as Float).toDouble()
                 invalidate()
             }
         }
