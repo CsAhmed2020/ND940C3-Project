@@ -53,3 +53,7 @@ fun NotificationManager.sendNotification(status: String, fileName:String, applic
         .setAutoCancel(true)
     notify(NOTIFICATION_ID, builder.build())
 }
+
+fun NotificationManager.cancelNotifications() {
+    cancelAll()
+}

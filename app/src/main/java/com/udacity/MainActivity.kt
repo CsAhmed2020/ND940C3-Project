@@ -41,7 +41,13 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
         custom_button.setOnClickListener {
-            download()
+            if (repoUrl.isEmpty()) {
+                Toast.makeText(applicationContext, "Select a file to download", Toast.LENGTH_SHORT)
+                    .show()
+
+            }else {
+                download()
+            }
         }
     }
 
@@ -76,6 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun download() {
+
         custom_button.updateBtnState(ButtonState.Loading)
         custom_button.isEnabled = false
 

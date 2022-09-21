@@ -9,6 +9,8 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -18,8 +20,9 @@ class LoadingButton @JvmOverloads constructor(
     private var heightSize = 0
 
     private val valueAnimator = ValueAnimator()
-    private val btnBackColor = Color.GRAY
-    private val textColor = context.getColor(R.color.white)
+    private var btnBackColor: Int
+    private var textColor: Int
+    private var textSize:Int
     private var progress : Double = 0.0
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
@@ -38,7 +41,27 @@ class LoadingButton @JvmOverloads constructor(
 
 
     init {
-        isEnabled = false
+        isEnabled = true
+        val attrs = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.LoadingButton,
+            0,0
+        )
+
+        btnBackColor = attrs.getColor(
+            R.styleable.LoadingButton_BtnBackgroundColor,
+            Color.GRAY
+        )
+
+        textColor = attrs.getColor(
+            R.styleable.LoadingButton_BtnTextColor,
+            ContextCompat.getColor(context,R.color.white)
+        )
+
+        textSize = attrs.getInt(
+            R.styleable.LoadingButton_BtnTextSize,
+            16
+        )
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
